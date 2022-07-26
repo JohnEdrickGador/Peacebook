@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 
 // get user model registered in Mongoose
 const User = mongoose.model("User");
+const Post = mongoose.model("Post");
 
 const signUp = (req, res) => {
   const newuser = new User({
@@ -90,4 +91,29 @@ const checkIfLoggedIn = (req, res) => {
     });
 }
 
-export { signUp, login, checkIfLoggedIn }
+const SubmitPost = (req, res) => {
+  const newPost = new Post({
+    content: req.body.content,
+    author: req.body.author
+  })
+
+  console.log("New post: ");
+  console.log(newPost);
+  newPost.save((err) => {
+    if (err) { return res.send({ success: false }); }
+    else { return res.send({ success: true }); }
+  });
+
+  //add the post to the user's list of posts
+  User.updateOne(
+    {_id: req.body.author},
+    {$push:{posts:[newPost._id]}},
+    (err,output) => {
+      if (!err) {
+        console.log(output)
+      }
+    }
+  )
+  
+}
+export { signUp, login, checkIfLoggedIn, SubmitPost }

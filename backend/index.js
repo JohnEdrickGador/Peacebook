@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 // import UserSchema from "./models/user.js";
 import "./models/user.js";
+import "./models/post.js";
 import setUpRoutes from "./routes.js";
 
 //connect to mongoDB server
