@@ -1,8 +1,10 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
+import Header from "../components/Header";
+import Profile from "../components/Profile";
 
-class Dashboard extends React.Component {
+class Home extends React.Component {
     constructor(props) {
         super(props);
 
@@ -10,6 +12,7 @@ class Dashboard extends React.Component {
             checkedifLoggedIn: false,
             isLoggedIn: null,
             username: localStorage.getItem('username'),
+            userId: localStorage.getItem('userId'),
         }
         this.logout = this.logout.bind(this);
     }
@@ -54,9 +57,10 @@ class Dashboard extends React.Component {
         else{
             if(this.state.isLoggedIn) {
                 return(
+                //content
                 <div>
-                    <h1>Welcome to your dashboard, {this.state.username}</h1>
-                    <button id="logout" onClick={this.logout}>Log out</button>
+                  <Header btn={this.logout}/>
+                  <Profile name={this.state.username}/>
                 </div>
                 )      
             }
@@ -68,4 +72,4 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard
+export default Home

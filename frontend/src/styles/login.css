@@ -1,6 +1,3 @@
-body{
-    background-color: #212121;
-}
 .container {
     border-radius: 20px;
     background-color: #363535;
@@ -34,21 +31,20 @@ form{
     overflow: hidden;
 }
 
-input, button{
-    font-size: 16px;
-    padding: 5px;
-}
-
-input {
+#l-email, #l-password {
     background-color:rgba(0, 0, 0, 0);
     border: 2px solid #4267B2;
     border-radius: 30px;
     color: white;
     transition: 0.2s all ease-in-out;
+    padding: 5px;
+    font-size: 16px;
 }
 
 #login {
     width: 200px;
+    padding: 5px;
+    font-size: 16px;
     align-self: center;
     background-color:#4267B2;
     border: 2px solid rgba(0, 0, 0, 0);
@@ -65,12 +61,12 @@ input {
     border: 2px solid #00bb27;
 }
 
-input:hover{
+#l-email:hover, #l-password:hover{
     transform: scale(1.05);
 }
 
 /* focus animations */
 
-input:focus {
+#l-email:focus, #l-password:focus {
     transform: scale(1.05);
 }

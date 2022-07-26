@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Cookies from "universal-cookie";
 
+
 export default function Login() {
     const navigate = useNavigate();
 
@@ -35,10 +36,10 @@ export default function Login() {
                         age: 60*60,
                         sameSite:"lax" 
                     });
-
                 localStorage.setItem("username", body.username);
+                localStorage.setItem("userId", body.id);
                 alert("Successfully logged in");
-                navigate("/dashboard");
+                navigate("/home");
                }
               else { alert("Double check your credentials"); }
             });
