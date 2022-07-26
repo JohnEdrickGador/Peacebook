@@ -1,0 +1,66 @@
+.main-parent {
+    display: flex;
+}
+
+.content {
+    width: 50%;
+    border: 1px solid red;
+    font-family: "Montserrat";
+}
+
+.content h1 {
+    color: white;
+    text-align: center;
+}
+
+.user-post {
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid yellow; */
+    padding:2%;
+    margin: 20px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #2e2d2d;
+    border-radius: 10px;
+}
+
+.user-post textarea {
+    width: 80%;
+    height: 7vh;
+    resize: none;
+    padding: 5px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.other-post {
+    padding: 5px;
+    margin: 20px;
+    color: white;
+    background-color: #2e2d2d;
+    border-radius: 10px;
+}
+
+.btn-cont {
+    margin-top: 1vh;
+    width: 86%;
+}
+
+.btn-post {
+    font-family: 'Montserrat';
+    font-weight: 700;
+    float: right;
+    background-color: #4267B2;
+    color: white;
+    padding: 5px;
+    width: 20%;
+    border: none;
+    border-radius: 5px;
+    transition: 0.2s all ease-in-out;
+}
+
+.btn-post:hover {
+    transform: scale(1.1);
+}

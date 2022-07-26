@@ -1,17 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+
 body{
     background-color: #23375e;
 }
 .profile-container{
     font-family: 'Montserrat', sans-serif;
-    /* border: 1px solid green; */
-    width: 28%;
-    padding: 5px;
-    height: 500px;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+    border: 1px solid green;
+    width: 25%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .profile-card{
@@ -20,6 +21,7 @@ body{
     padding: 5px;
     color: white;
     border-radius: 10px;
+    margin: 5px;
     width: auto;
     height: 500px;
     text-align: center;

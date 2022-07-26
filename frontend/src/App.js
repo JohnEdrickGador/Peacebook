@@ -6,6 +6,7 @@ import "./styles/login.css";
 import "./styles/signup.css"
 import "./styles/header.css";
 import "./styles/profile.css";
+import "./styles/content.css";
 function App() {
   
 

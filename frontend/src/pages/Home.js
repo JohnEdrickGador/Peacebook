@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import Cookies from "universal-cookie";
 import Header from "../components/Header";
 import Profile from "../components/Profile";
-
+import Content from "../components/Content";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -60,7 +60,10 @@ class Home extends React.Component {
                 //content
                 <div>
                   <Header btn={this.logout}/>
-                  <Profile name={this.state.username}/>
+                  <div className="main-parent">
+                    <Profile name={this.state.username}/>
+                    <Content />
+                  </div>
                 </div>
                 )      
             }
