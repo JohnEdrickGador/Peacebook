@@ -61,8 +61,8 @@ class Home extends React.Component {
                 <div>
                   <Header btn={this.logout}/>
                   <div className="main-parent">
-                    <Profile name={this.state.username}/>
-                    <Content userId={this.state.userId}/>
+                    <Profile name={this.state.username} userId={this.state.userId}/>
+                    <Content userId={this.state.userId} username={this.state.username}/>
                   </div>
                 </div>
                 )      

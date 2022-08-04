@@ -6,25 +6,28 @@ class Content extends React.Component{
         super(props);
 
         this.state = {
-            userId : localStorage.getItem("userId")
+            userId : this.props.userId,
+            username : this.props.username,
+            posts : []
         }
         this.SubmitPost = this.SubmitPost.bind(this);
     }
+
     //add submit post functionality
     SubmitPost(e) {
         e.preventDefault();
         //create a post object
         const post = {
             content: document.getElementById('post-input').value,
-            author: this.state.userId
+            authorId: this.state.userId,
+            authorName: this.state.username,
+            date: Date()
         }
         //send post request to server
         fetch("http://localhost:3001/submitPost",
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
+          headers: {"Content-Type": "application/json"},
           body: JSON.stringify(post)
         })
 
@@ -35,6 +38,28 @@ class Content extends React.Component{
         })
         document.getElementById('post-input').value = "";
     }
+    
+    componentDidMount() {
+        const user = {
+            username : this.state.username
+        }
+        //send get request to server
+        fetch("http://localhost:3001/GetPosts",
+    {
+        method: 'POST',
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(user)
+    })
+
+    .then(response => response.json())
+    .then(body => {
+        if (body != null){
+            this.setState({posts : body});
+            console.log(this.state.posts)
+        }
+        })
+    }
+    
 
         render() {
             return (
@@ -46,9 +71,20 @@ class Content extends React.Component{
                         <button className="btn-post" onClick={this.SubmitPost}>Post</button>
                     </div>
                 </div>
-                <UserPost />
-                <UserPost />
-                <UserPost />
+                {
+                    this.state.posts.map((post,i) => {
+                        if (post.authorId === this.state.userId) {
+                            return <UserPost author = {post.authorName} content = {post.content} date = {post.date} key = {post._id} id = {post._id} isDisabled = {false}/>
+                        }
+                        else{
+                            return <UserPost author = {post.authorName} content = {post.content} date = {post.date} key = {post._id} id = {post._id} isDisabled = {true}/>
+                        }
+                        
+                    })
+                }
+                
+                
+
             </div>
             )
         }  

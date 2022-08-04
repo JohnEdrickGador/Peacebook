@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
+import { request } from 'express';
 
 
 // get user model registered in Mongoose
@@ -53,7 +54,7 @@ const login = (req, res) => {
       const token = jwt.sign(tokenPayload, "THIS_IS_A_SECRET_STRING");
 
       // return the token to the client
-      return res.send({ success: true, token, username: `${user.firstname}`, id: user._id });
+      return res.send({ success: true, token, username: `${user.firstname} ${user.lastname}`, id: user._id });
     })
   })
 }
@@ -94,8 +95,12 @@ const checkIfLoggedIn = (req, res) => {
 const SubmitPost = (req, res) => {
   const newPost = new Post({
     content: req.body.content,
-    author: req.body.author
+    authorId: req.body.authorId,
+    authorName: req.body.authorName,
+    date: req.body.date
   })
+
+  console.log(req.body.authorName)
 
   console.log("New post: ");
   console.log(newPost);
@@ -106,8 +111,8 @@ const SubmitPost = (req, res) => {
 
   //add the post to the user's list of posts
   User.updateOne(
-    {_id: req.body.author},
-    {$push:{posts:[newPost._id]}},
+    {_id: req.body.authorId},
+    {$push:{allPosts:[newPost._id], personalPosts:[newPost._id]}},
     (err,output) => {
       if (!err) {
         console.log(output)
@@ -116,4 +121,14 @@ const SubmitPost = (req, res) => {
   )
   
 }
-export { signUp, login, checkIfLoggedIn, SubmitPost }
+
+const GetPosts = (req,res) => {
+  Post.find(function (err, posts) {
+    if (err) {
+      console.log("error occurred")
+    } else {
+      res.json(posts);
+    }
+  }).sort({date: -1});
+}
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts}
