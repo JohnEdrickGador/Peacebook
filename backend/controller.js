@@ -131,4 +131,18 @@ const GetPosts = (req,res) => {
     }
   }).sort({date: -1});
 }
-export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts}
+
+const EditPost = (req,res) => {
+  var postId = req.body.id;
+  var newContent = req.body.content;
+
+  //update the post
+  Post.updateOne({_id:postId},
+    {content:newContent},
+    (err,output) => {
+      if (!err) {
+        console.log(output)
+      }
+    })
+}
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost}

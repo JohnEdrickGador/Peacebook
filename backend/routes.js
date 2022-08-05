@@ -1,4 +1,4 @@
-import { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts} from "./controller.js";
+import { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost} from "./controller.js";
 
 const setUpRoutes = (app) => {
   app.post("/signup", signUp);
@@ -6,6 +6,7 @@ const setUpRoutes = (app) => {
   app.post("/checkifloggedin", checkIfLoggedIn);
   app.post("/submitPost", SubmitPost);
   app.post("/GetPosts", GetPosts);
+  app.post("/EditPost",EditPost);
 }
 
 export default setUpRoutes;

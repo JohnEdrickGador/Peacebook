@@ -37,6 +37,7 @@ class Content extends React.Component{
             else { alert("Failed to save post"); }
         })
         document.getElementById('post-input').value = "";
+        window.location.reload();
     }
     
     componentDidMount() {
@@ -82,6 +83,7 @@ class Content extends React.Component{
                         
                     })
                 }
+
                 
                 
 
