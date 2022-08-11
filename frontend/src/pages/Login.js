@@ -52,6 +52,7 @@ export default function Login() {
                 <input type="text" placeholder="Email" id='l-email'></input>
                 <input type="password" placeholder='Password' id='l-password'></input>
                 <button id='login' onClick={login}>LOGIN</button>
+                <p>Dont't have an account? <a href="/signup">signup here!</a></p>
             </form>
         </div>
     )

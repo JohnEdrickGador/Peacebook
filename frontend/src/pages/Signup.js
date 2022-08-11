@@ -64,35 +64,6 @@ export default function Signup() {
 
     }
 
-    // let onChangePassword = (e) => {
-    //   // var errorList = document.getElementById('errors-list');
-    //   // var field = e.target.placeholder;
-    //   // var identify = e.target.id;
-    //   var repeat = document.getElementById("r-password");
-    //   if (e.target.value === "" || e.target.value == null){
-    //     repeat.disabled = true;
-    //     // if (errorList.querySelector(`#${identify}-s`) !== null){
-    //     //   var error = document.getElementById(`${identify}-s`)
-    //     //   error.innerHTML = `${field} cannot be blank`;
-    //     }
-    //     // else{
-    //     //   var error = document.createElement('li');
-    //     //   error.setAttribute('id',`${identify}-s`);
-    //     //   error.appendChild(document.createTextNode(field + " cannot be blank"));
-    //     //   errorList.appendChild(error);
-    //     // }
-    //   else{
-    //     repeat.disabled = false;
-    //     let crit1 = document.getElementById('char-length');
-    //     if (e.target.value.length >= 8 ) { 
-    //       crit1.classList.remove('invalid');
-    //       crit1.classList.add('valid');
-    //   }
-    //   else{
-    //     crit1.classList.add('invalid');
-    //     crit1.classList.remove('valid');
-    //   }
-    // }}
       
     let onKeyupPassword = (e) => {
       var isNum = false;
