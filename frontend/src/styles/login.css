@@ -68,11 +68,12 @@ form{
 }
 
 #l-email:hover, #l-password:hover{
-    transform: scale(1.05);
+    transform: scale(1.02);
 }
 
 /* focus animations */
 
 #l-email:focus, #l-password:focus {
-    transform: scale(1.05);
+    outline:none;
+    transform: scale(1.02);
 }
