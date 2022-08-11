@@ -35,6 +35,7 @@ class UserPost extends React.Component {
     }
 
     editPost(e) {
+        e.preventDefault();
         let postContent = e.target.parentElement.children[1];
         let editBtn = e.target;
         let cancelBtn = e.target.parentElement.children[4];
@@ -55,12 +56,27 @@ class UserPost extends React.Component {
     }
 
     deletePost(e){
+        e.preventDefault();
         let postContent = e.target.parentElement.children[1];
         let deleteBtn = e.target;
         let editBtn = e.target.parentElement.children[3];
         let postId = e.target.parentElement.id;
-        if (deleteBtn.innerHTML == "Delete") {
-            console.log(postId)
+        if (deleteBtn.innerHTML === "Delete") {
+            const req = {
+                id : postId,
+            }
+            fetch("http://localhost:3001/DeletePost",
+            {
+              method: "POST",
+              headers: {"Content-Type": "application/json"},
+              body: JSON.stringify(req)
+            })
+            .then(response => response.json())
+            .then(body => {
+                if (body.success) { alert("Successfully deleted post"); }
+                else { alert("Failed to delete post"); }
+            })
+            window.location.reload();
         }
         else{
             postContent.blur();

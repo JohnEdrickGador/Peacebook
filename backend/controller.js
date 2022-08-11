@@ -108,29 +108,47 @@ const SubmitPost = (req, res) => {
     if (err) { return res.send({ success: false }); }
     else { return res.send({ success: true }); }
   });
-
-  //add the post to the user's list of posts
-  User.updateOne(
-    {_id: req.body.authorId},
-    {$push:{allPosts:[newPost._id], personalPosts:[newPost._id]}},
-    (err,output) => {
-      if (!err) {
-        console.log(output)
-      }
-    }
-  )
   
 }
 
-const GetPosts = (req,res) => {
-  Post.find(function (err, posts) {
-    if (err) {
-      console.log("error occurred")
-    } else {
-      res.json(posts);
+const GetFriends = (req,res) => {
+  User.findById(req.body.userId, (err,user) => {
+    if (err){ 
+      console.log(err) 
     }
-  }).sort({date: -1});
+    else{
+      console.log(user.friends)
+      res.json(user)
+    }
+  })
 }
+
+const GetUserPosts = (req,res) => {
+  Post.find({authorId:req.body.userId}, (err,posts) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      res.json(posts)
+    }
+  })
+}
+
+
+
+const GetPosts = (req,res) => {
+    var authorsList = req.body.friends;
+    authorsList.push(req.body.userId);
+    Post.find({authorId:{$in:authorsList}},(err, posts) => {
+      if (err) {
+        console.log("error occurred")
+      } 
+      else {
+        res.json(posts);
+      }
+    }).sort({date: -1});
+    }
+
 
 const EditPost = (req,res) => {
   var postId = req.body.id;
@@ -145,4 +163,17 @@ const EditPost = (req,res) => {
       }
     })
 }
-export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost}
+
+const DeletePost = (req,res) => {
+  var postId = req.body.id;
+  Post.deleteOne({_id:postId},(err,res) => {
+    if (err) {
+      console.log(err)
+    }
+    else{
+      console.log(res)
+    }
+  })
+
+}
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost}

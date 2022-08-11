@@ -13,10 +13,11 @@ class Profile extends React.Component {
 
     componentDidMount() {
         const user = {
-            username : this.state.username
+            username : this.state.username,
+            userId : this.state.userId
         }
         //send get request to server
-        fetch("http://localhost:3001/GetPosts",
+        fetch("http://localhost:3001/GetUserPosts",
     {
         method: 'POST',
         headers: {"Content-Type": "application/json"},

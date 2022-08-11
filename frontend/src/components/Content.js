@@ -8,6 +8,7 @@ class Content extends React.Component{
         this.state = {
             userId : this.props.userId,
             username : this.props.username,
+            friends : [],
             posts : []
         }
         this.SubmitPost = this.SubmitPost.bind(this);
@@ -42,23 +43,43 @@ class Content extends React.Component{
     
     componentDidMount() {
         const user = {
-            username : this.state.username
+            username : this.state.username,
+            userId : this.state.userId
         }
-        //send get request to server
-        fetch("http://localhost:3001/GetPosts",
-    {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(user)
-    })
-
-    .then(response => response.json())
-    .then(body => {
-        if (body != null){
-            this.setState({posts : body});
-            console.log(this.state.posts)
-        }
+        //send POST request to server for friendslist
+        fetch("http://localhost:3001/GetFriends",
+        {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(user)
         })
+
+        .then(response => response.json())
+        .then(body => {
+            if (body != null) {
+                // this.setState({friends: body.friends});
+                const friends = {
+                    friends: body.friends,
+                    userId: this.state.userId
+                }
+                //send POST request to server for posts
+                fetch("http://localhost:3001/GetPosts",
+                {
+                    method: 'POST',
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(friends)
+                })
+        
+            .then(response => response.json())
+            .then(body => {
+                if (body != null){
+                    this.setState({posts : body});
+                }
+                })
+            }
+        })
+
+        
     }
     
 
