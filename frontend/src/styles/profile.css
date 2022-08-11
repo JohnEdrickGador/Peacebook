@@ -1,7 +1,7 @@
 *{
     box-sizing: border-box;
 }
-
+/* colors #F8D49E #F7E6CA #64C4C3 #5093B8 */
 .profile-container{
     font-family: 'Montserrat', sans-serif;
     width: 25%;
@@ -13,7 +13,7 @@
 
 .profile-card{
     /* border: 1px solid red; */
-    background-color: #3c5fa3;
+    background-color: #5093B8;
     padding: 5px;
     color: white;
     border-radius: 10px;
@@ -34,7 +34,7 @@
 }
 
 .stats-container{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     height: 100px;
     width: 30%;
 }

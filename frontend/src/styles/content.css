@@ -7,8 +7,8 @@
     font-family: "Montserrat";
 }
 
-.content h1 {
-    color: white;
+.content,h1 {
+    color: #5093B8;
     text-align: center;
 }
 
@@ -20,11 +20,12 @@
     margin: 20px;
     justify-content: space-around;
     align-items: center;
-    background-color: #2e2d2d;
+    background-color: #5093B8;
     border-radius: 10px;
 }
 
 .user-post textarea {
+    outline: none;
     width: 80%;
     height: 7vh;
     resize: none;
@@ -32,14 +33,16 @@
     font-family: 'Montserrat';
     font-weight: 700;
     border-radius: 10px;
+    transition: 0.2s all ease-in-out;
 }
 
 .other-post {
     padding: 5px;
     margin: 20px;
     color: white;
-    background-color: #2e2d2d;
+    background-color: #5093B8;
     border-radius: 10px;
+    text-align: left;
 }
 
 .btn-cont {
@@ -60,6 +63,36 @@
     transition: 0.2s all ease-in-out;
 }
 
+.post-buttons-container {
+    display: flex;
+    justify-content: flex-end;
+    column-gap: 10px;
+}
+
+.post-buttons {
+    border: none;
+    border-radius: 5px;
+    background-color: #4267B2;
+    color: white;
+    width: 10%;
+    padding: 5px;
+    transition: 0.2s all ease-in-out;
+}
+
+
+/* hover animations */
 .btn-post:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.post-buttons:hover {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+/* active animations */
+.user-post textarea:focus {
+    font-size: 18px;
     transform: scale(1.1);
 }

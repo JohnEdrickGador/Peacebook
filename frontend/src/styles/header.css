@@ -7,9 +7,10 @@ body{
     padding: 5px;
     outline: 1px solid black;
     display: flex;
-    background-color: #4267B2;
+    background-color: #5093B8;
 }
 .search-box{
+    outline: none;
     margin: auto;
     border: none;
     border-radius: 15px;
@@ -17,11 +18,27 @@ body{
     padding: 3px;
     width: 30%;
     color: white;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0.1);
 }
+
+::placeholder {
+    color: white;
+}
+
 .logout-button{
     float: left;
     margin-right: 15px;
     padding: 5px;
     font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4267B2;
+    color: white;
+    width: 5%;
+    transition: 0.2s all ease-in-out;
+}
+
+.logout-button:hover {
+    transform: scale(1.1);
+    cursor: pointer;
 }

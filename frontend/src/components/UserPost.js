@@ -36,10 +36,11 @@ class UserPost extends React.Component {
 
     editPost(e) {
         e.preventDefault();
-        let postContent = e.target.parentElement.children[1];
+        let buttonsContainer = e.target.parentElement;
+        let postContent = buttonsContainer.parentElement.children[1];
         let editBtn = e.target;
-        let cancelBtn = e.target.parentElement.children[4];
-        let postId = e.target.parentElement.id;
+        let cancelBtn = buttonsContainer.children[1];
+        let postId = buttonsContainer.parentElement.id;
         if (editBtn.innerHTML === "Edit") {
             cancelBtn.innerHTML = "Cancel";
             postContent.contentEditable = true;
@@ -57,10 +58,11 @@ class UserPost extends React.Component {
 
     deletePost(e){
         e.preventDefault();
-        let postContent = e.target.parentElement.children[1];
+        let buttonsContainer = e.target.parentElement;
+        let postContent = buttonsContainer.parentElement.children[1];
         let deleteBtn = e.target;
-        let editBtn = e.target.parentElement.children[3];
-        let postId = e.target.parentElement.id;
+        let editBtn = buttonsContainer.children[1];
+        let postId = buttonsContainer.parentElement.id;
         if (deleteBtn.innerHTML === "Delete") {
             const req = {
                 id : postId,
@@ -87,15 +89,29 @@ class UserPost extends React.Component {
     }
 
     render(){
-        return(
-            <div className="other-post" id={this.props.id}>
-                <p>{this.state.author}</p>
-                <p contentEditable={false}>{this.state.content}</p>
-                <p>{this.state.date}</p>
-                <button disabled={this.state.isDisabled} id="edit-post" onClick={this.editPost}>Edit</button>
-                <button disabled={this.state.isDisabled} id="delete-post" onClick={this.deletePost}>Delete</button>
-            </div>
-        )
+        if (this.state.isDisabled === false) {
+            return(
+                <div className="other-post" id={this.props.id}>
+                    <p>{this.state.author}</p>
+                    <p contentEditable={false}>{this.state.content}</p>
+                    <p>{this.state.date}</p>
+                    <div className="post-buttons-container">
+                        <button disabled={this.state.isDisabled} id="edit-post"  className="post-buttons" onClick={this.editPost}>Edit</button>
+                        <button disabled={this.state.isDisabled} id="delete-post" className="post-buttons" onClick={this.deletePost}>Delete</button>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return(
+                <div className="other-post" id={this.props.id}>
+                    <p>{this.state.author}</p>
+                    <p contentEditable={false}>{this.state.content}</p>
+                    <p>{this.state.date}</p>
+                </div>
+            )
+        }
+        
     }
 }
 
