@@ -1,6 +1,9 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
+    //for redirecting
+    const navigate = useNavigate();
     // form validation
     var isFnameValid = false;
     var isLnameValid = false;
@@ -176,7 +179,10 @@ export default function Signup() {
           })
           .then(response => response.json())
           .then(body => {
-            if (body.success) { alert("Successfully saved user"); }
+            if (body.success) { 
+              alert("Successfully saved user"); 
+              navigate("/login") 
+            }
             else { alert("Failed to save user"); }
           });
       }
@@ -186,28 +192,38 @@ export default function Signup() {
         
     }
 
+    let passwordFocus = () => {
+      const errorList = document.getElementById('errors-list');
+      errorList.style.opacity = 1;
+    }
+    
+    let passwordBlur = () => {
+      const errorList = document.getElementById('errors-list');
+      errorList.style.opacity = 0;
+    }
+
     return (
       <div>
         <div className='signup-container'>
             <h2>Sign Up</h2>
-            <form>
+            <form className='signup-form'>
                 <input type="text" placeholder="First Name" id='fname' required onChange={onChangeFName} ></input>
                 <input type="text" placeholder="Last Name" id='lname' required onChange={onChangeLName} ></input>
                 <input type="text" placeholder="Email" id='s-email' required onChange={onChangeEmail} ></input>
-                <input type="password" placeholder='Password' id='s-password' required onKeyUp={onKeyupPassword}></input>
+                <input type="password" placeholder='Password' id='s-password' required onKeyUp={onKeyupPassword} onFocus={passwordFocus} onBlur={passwordBlur}></input>
                 <input type="password" placeholder='Repeat Password' id='r-password' required onChange={matchPassword} disabled></input>
                 <button id='signup' onClick={signup} type="submit">Sign Up</button>
             </form>
-        </div>
-        <div className='error-div'>
+            <div className='error-div' id='errors-list'>
             <h3>Errors:</h3>
-            <ul id='errors-list'>
+            <ul>
               <li className='invalid' id='char-length'>8 or more characters</li>
               <li className='invalid' id='uppercase'>atleast 1 uppercase letter</li>
               <li className='invalid' id='lowercase'>lowercase letteratleast 1 lowercase letter</li>
               <li className='invalid' id='number'>atleast 1 number</li>
             </ul>
-          </div>
+            </div>
+        </div>
       </div>
         
     )

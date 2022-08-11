@@ -27,7 +27,7 @@ h2 {
     color: white;
 }
 
-form{
+.login-form{
     display: flex;
     flex-direction: column;
     justify-content: space-between;

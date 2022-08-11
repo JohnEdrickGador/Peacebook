@@ -1,6 +1,6 @@
 .signup-container {
     border-radius: 20px;
-    background-color: #363535;
+    background-color: #64C4C3;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,7 +18,7 @@
     color: white;
 }
 
-form{
+.signup-form{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -28,10 +28,37 @@ form{
     overflow: hidden;
 }
 
-.error-div{
-    display: inline-block;
+.signup-form input{
+    outline: none;
+    background-color:rgba(0, 0, 0, 0);
+    border: 2px solid #5093B8;
+    border-radius: 30px;
     color: white;
-    border: 1px solid green;
+    transition: 0.2s all ease-in-out;
+    padding: 5px;
+    font-size: 16px;
+}
+
+#signup {
+    width: 75%;
+    padding: 5px;
+    font-size: 16px;
+    align-self: center;
+    background-color:#4267B2;
+    border: 2px solid rgba(0, 0, 0, 0);
+    border-radius: 30px;
+    color: white;
+    transition: 0.2s all ease-in-out;
+    cursor: pointer;
+}
+
+.error-div{
+    transition: 0.1s all ease-in-out;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: rgba(248, 212, 158, 0.75);
+    opacity: 0;
+    color: white;
 }
 
 .invalid{
@@ -39,4 +66,10 @@ form{
 }
 .valid{
     color:green
+}
+
+/* hover animations */
+#signup:hover {
+    background-color: rgba(0, 0, 0, 0);
+    border: 2px solid #00bb27;
 }

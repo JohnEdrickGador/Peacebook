@@ -48,7 +48,7 @@ export default function Login() {
     return(
         <div className='container'>
             <h2>LOGIN</h2>
-            <form>
+            <form className='login-form'>
                 <input type="text" placeholder="Email" id='l-email'></input>
                 <input type="password" placeholder='Password' id='l-password'></input>
                 <button id='login' onClick={login}>LOGIN</button>
