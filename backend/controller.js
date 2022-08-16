@@ -166,14 +166,27 @@ const EditPost = (req,res) => {
 
 const DeletePost = (req,res) => {
   var postId = req.body.id;
-  Post.deleteOne({_id:postId},(err,res) => {
+  Post.deleteOne({_id:postId},(err,users) => {
     if (err) {
       console.log(err)
     }
     else{
-      console.log(res)
+      res.json(users)
     }
   })
 
 }
-export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost}
+
+const Search = (req,res) => {
+  let value = req.body.value
+  User.find({$or:[{firstname:{$regex:value, $options: "i"}},{lastname:{$regex:value, $options: "i"}}]}, (err, users) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.json(users)
+    }
+  })
+}
+
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search}

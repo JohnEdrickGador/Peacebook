@@ -2,16 +2,37 @@ body{
     margin:0;
     padding: 0;
 }
+
+.header-wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    border: 1px solid black;
+}
+
+.results-container{
+    align-self: center;
+    width: 30%;
+    border: 1px solid white;
+    margin-top: 2%;
+    position: absolute;
+}
+
 .header {
     width: 100%;
     padding: 5px;
-    outline: 1px solid black;
-    display: flex;
+    /* outline: 1px solid black; */
+    /* display: flex; */
     background-color: #5093B8;
+    position: relative;
 }
 .search-box{
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%);
+    transform: translate(-50%);
     outline: none;
-    margin: auto;
+    /* margin: auto; */
     border: none;
     border-radius: 15px;
     font-size: 16px;
@@ -26,7 +47,7 @@ body{
 }
 
 .logout-button{
-    float: left;
+    float: right;
     margin-right: 15px;
     padding: 5px;
     font-size: 16px;

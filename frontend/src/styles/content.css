@@ -7,7 +7,7 @@
     font-family: "Montserrat";
 }
 
-.content,h1 {
+.content > h1 {
     color: #5093B8;
     text-align: center;
 }
