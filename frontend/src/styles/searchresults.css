@@ -1,0 +1,16 @@
+.results-container{
+    background-color: #F8D49E;
+    align-self: center;
+    width: 30%;
+    /* border: 1px solid white; */
+    margin-top: 2%;
+    position: absolute;
+    max-height: 150px;
+    overflow: scroll;
+}
+
+.search-result {
+    border-bottom: 1px solid gray;
+    padding: 2px;
+    margin: 3px;
+}

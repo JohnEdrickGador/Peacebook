@@ -10,14 +10,6 @@ body{
     border: 1px solid black;
 }
 
-.results-container{
-    align-self: center;
-    width: 30%;
-    border: 1px solid white;
-    margin-top: 2%;
-    position: absolute;
-}
-
 .header {
     width: 100%;
     padding: 5px;

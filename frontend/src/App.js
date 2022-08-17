@@ -7,6 +7,7 @@ import "./styles/signup.css"
 import "./styles/header.css";
 import "./styles/profile.css";
 import "./styles/content.css";
+import "./styles/searchresults.css"
 function App() {
   
 

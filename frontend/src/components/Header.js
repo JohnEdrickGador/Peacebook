@@ -1,5 +1,5 @@
 import React from "react";
-
+import SearchResults from "./SearchResults";
 class Header extends React.Component {
     constructor (props) {
         super(props);
@@ -22,11 +22,14 @@ class Header extends React.Component {
         })
         .then(response => response.json())
         .then(body => {
-            this.setState({searchResults:body})
-            console.log(body)
+            if (e.target.value.length > 0) {
+                this.setState({searchResults:body})
+            }
+            else {
+                this.setState({searchResults:[]})
+            } 
         })
         }
-
 
     render() {
         return (
@@ -36,11 +39,11 @@ class Header extends React.Component {
                     <button className="logout-button" onClick={this.props.btn}>Log out</button>
                 </div>
                 <div className="results-container">
-                    <ul>
-                        <li>1</li>
-                        <li>1</li>
-                        <li>1</li>
-                    </ul>
+                    {
+                       this.state.searchResults.map((person,i) => {
+                            return <SearchResults key={i} firstname={person.firstname} lastname={person.lastname}/>  
+                       })
+                    }
                 </div>
             </div>
             
