@@ -1,0 +1,23 @@
+.misc-container {
+    font-family: 'Montserrat', sans-serif;
+    width: 25%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid black; */
+}
+
+.friend-recomms, .friend-requests {
+    height: 40vh;
+    width: auto;
+    background-color: #5093B8;
+    border-radius: 10px;
+    margin-top: 30px;
+    padding: 5px;
+}
+
+.friend-recomms > h2, .friend-requests > h2 {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}

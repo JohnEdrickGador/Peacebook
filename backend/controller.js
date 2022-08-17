@@ -117,7 +117,6 @@ const GetFriends = (req,res) => {
       console.log(err) 
     }
     else{
-      console.log(user.friends)
       res.json(user)
     }
   })
@@ -189,4 +188,25 @@ const Search = (req,res) => {
   })
 }
 
-export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search}
+const RecommendFriends = (req, res) => {
+  let friends = req.body.friendList
+  friends.push(req.body.userId)
+  console.log(friends)
+  User.count({}, (err, number) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      User.find({_id:{$nin:friends}}, (err, users) => {
+        if (err) {
+          console.log(err)
+        }
+        else {
+          res.json(users)
+        }
+      }).limit(5)
+    }
+  })
+}
+
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search,RecommendFriends}

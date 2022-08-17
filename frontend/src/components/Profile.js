@@ -26,16 +26,10 @@ class Profile extends React.Component {
 
     .then(response => response.json())
     .then(body => {
-        var personalPosts = 0;
         if (body != null){
-            for (let index = 0; index < body.length; index++) {
-                const post = body[index];
-                if (post.authorId === this.state.userId) {
-                    personalPosts++;
-                }
-            }
+            this.setState({personalPostCount:body.length})
         }
-        this.setState({personalPostCount:personalPosts})
+        
         })
     }
     render() {

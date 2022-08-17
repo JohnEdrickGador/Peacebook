@@ -1,4 +1,4 @@
-import { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost, Search} from "./controller.js";
+import { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost, Search, RecommendFriends} from "./controller.js";
 
 const setUpRoutes = (app) => {
   app.post("/signup", signUp);
@@ -10,7 +10,8 @@ const setUpRoutes = (app) => {
   app.post("/EditPost",EditPost);
   app.post("/GetFriends", GetFriends);
   app.post("/DeletePost", DeletePost);
-  app.post("/Search",Search)
+  app.post("/Search",Search),
+  app.post("/RecommendFriends", RecommendFriends);
 }
 
 export default setUpRoutes;

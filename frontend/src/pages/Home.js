@@ -4,6 +4,7 @@ import Cookies from "universal-cookie";
 import Header from "../components/Header";
 import Profile from "../components/Profile";
 import Content from "../components/Content";
+import MiscPanel from "../components/MiscPanel";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -63,6 +64,7 @@ class Home extends React.Component {
                   <div className="main-parent">
                     <Profile name={this.state.username} userId={this.state.userId}/>
                     <Content userId={this.state.userId} username={this.state.username}/>
+                    <MiscPanel />
                   </div>
                 </div>
                 )      
