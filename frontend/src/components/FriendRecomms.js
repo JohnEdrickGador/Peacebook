@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Recomms from './Recomms';
 class FriendRecomms extends React.Component {
     constructor(props) {
         super(props);
@@ -51,11 +51,13 @@ class FriendRecomms extends React.Component {
         return(
             <div className='friend-recomms'>
                 <h2>People you might know</h2>
+                <div className='recomms-container'>
                 {
                     this.state.recommendations.map((person,i) => {
-                        return <p key={i}>{`${person.firstname} ${person.lastname}`}</p>
+                        return <Recomms firstname={person.firstname} lastname={person.lastname} email={person.email} userId={person._id} key={i}/>
                     })
                 }
+                </div>
             </div>
         )
     }
