@@ -9,7 +9,9 @@ const UserSchema = new mongoose.Schema({
   //new additions for dashboard
   // allPosts: [{type: String}],
   // personalPosts : [{type: String}],
-  friends: [{type: String}]
+  friends: [{type: String}],
+  notifications: [{userId: String, notifType: String}],
+  requests: [{type:String}]
 });
 
 

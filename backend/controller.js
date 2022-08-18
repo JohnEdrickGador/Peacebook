@@ -1,6 +1,5 @@
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
-import { request } from 'express';
 
 
 // get user model registered in Mongoose
@@ -190,23 +189,48 @@ const Search = (req,res) => {
 
 const RecommendFriends = (req, res) => {
   let friends = req.body.friendList
+  let user = req.body.userId
   friends.push(req.body.userId)
-  console.log(friends)
   User.count({}, (err, number) => {
     if (err) {
       console.log(err)
     }
     else {
-      User.find({_id:{$nin:friends}}, (err, users) => {
+      User.find({_id:user},(err,response) => {
         if (err) {
           console.log(err)
         }
-        else {
-          res.json(users)
+        else{
+          var requests = response[0].requests
+          User.find({$and:[{_id:{$nin:friends}},{_id:{$nin:requests}}]}, (err, users) => {
+            if (err) {
+              console.log(err)
+            }
+            else {
+              res.json(users)
+            }
+          }).limit(5)
         }
-      }).limit(5)
+      })
+      
     }
   })
 }
 
-export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search,RecommendFriends}
+const SendFriendRequest = (req,res) => {
+    const receiver = req.body.receiver;
+    const sender = req.body.sender;
+    console.log(receiver)
+    User.updateOne({_id:receiver}, {$push:{notifications:{userId:sender,notifType:"FriendRequest"}}},(err,output) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+    User.updateOne({_id:sender}, {$push : {requests:receiver}},(err,output) => {
+      if (err) {
+        console.log(err);
+      }
+    })
+}
+
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search,RecommendFriends,SendFriendRequest}
