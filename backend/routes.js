@@ -1,4 +1,4 @@
-import { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost, Search, RecommendFriends, SendFriendRequest} from "./controller.js";
+import { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost, Search, RecommendFriends, SendFriendRequest, ViewStats, AcceptRequest, RejectRequest} from "./controller.js";
 
 const setUpRoutes = (app) => {
   app.post("/signup", signUp);
@@ -13,6 +13,9 @@ const setUpRoutes = (app) => {
   app.post("/Search",Search),
   app.post("/RecommendFriends", RecommendFriends);
   app.post("/SendFriendRequest", SendFriendRequest);
+  app.post("/ViewStats",ViewStats);
+  app.post("/AcceptRequest",AcceptRequest);
+  app.post("/RejectRequest",RejectRequest);
 }
 
 export default setUpRoutes;

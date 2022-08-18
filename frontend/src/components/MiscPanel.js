@@ -1,17 +1,12 @@
 import React from 'react';
 import FriendRecomms from './FriendRecomms';
-class MiscPanel extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-    
+import ReqsContainer from './ReqsContainer';
+class MiscPanel extends React.Component {    
     render() {
         return(
             <div className='misc-container'>
                 <FriendRecomms />
-                <div className='friend-requests'>
-                    <h2>Friend requests</h2>
-                </div>
+                <ReqsContainer />
             </div>
         )
     }

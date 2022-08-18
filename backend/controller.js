@@ -202,7 +202,8 @@ const RecommendFriends = (req, res) => {
         }
         else{
           var requests = response[0].requests
-          User.find({$and:[{_id:{$nin:friends}},{_id:{$nin:requests}}]}, (err, users) => {
+          var notifications = response[0].notifications.map(notification => notification.userId)
+          User.find({$and:[{_id:{$nin:friends}},{_id:{$nin:requests}},{_id:{$nin:notifications}}]}, (err, users) => {
             if (err) {
               console.log(err)
             }
@@ -233,4 +234,59 @@ const SendFriendRequest = (req,res) => {
     })
 }
 
-export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search,RecommendFriends,SendFriendRequest}
+const ViewStats = (req, res) => {
+  const userId = req.body.userId;
+  User.findById(userId, (err,user) => {
+    if (err) {
+      console.log(err)
+    }
+    else {
+      res.json(user)
+    }
+  })
+}
+
+const AcceptRequest = (req, res) => {
+  const newFriend = req.body.newFriend;
+  const notifId = req.body.notifId;
+  const user = req.body.userId;
+  //add new friend to user's friends list
+  User.updateOne({_id:user},{$push:{friends:newFriend}},(err,output) => {
+    if (err) {
+      console.log(err)
+    }
+  })
+
+  User.updateOne({_id:user},{$pull:{notifications:{_id:notifId}}},(err,output) => {
+    if (err) {
+      console.log(err);
+    }
+  })
+
+  User.updateOne({_id:newFriend},{$pull:{requests:user}},(err,output) => {
+    if (err) {
+      console.log(err);
+    }
+  })
+}
+
+const RejectRequest = (req,res) => {
+  const newFriend = req.body.newFriend;
+  const notifId = req.body.notifId;
+  const user = req.body.userId;
+  //remove from user notifications
+  User.updateOne({_id:user},{$pull:{notifications:{_id:notifId}}},(err,output) => {
+    if (err) {
+      console.log(err);
+    }
+  })
+
+  //remove from sender's requests
+  User.updateOne({_id:newFriend},{$pull:{requests:user}},(err,output) => {
+    if (err) {
+      console.log(err);
+    }
+  })
+}
+
+export { signUp, login, checkIfLoggedIn, SubmitPost, GetPosts, EditPost, GetFriends, GetUserPosts, DeletePost,Search,RecommendFriends,SendFriendRequest,ViewStats, AcceptRequest, RejectRequest}

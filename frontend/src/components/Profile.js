@@ -28,9 +28,7 @@ class Profile extends React.Component {
     .then(body => {
         if (body != null){
             this.setState({personalPostCount:body.length})
-        }
-        
-        })
+        }})
     }
     render() {
         return(
