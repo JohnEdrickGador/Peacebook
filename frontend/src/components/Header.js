@@ -1,11 +1,12 @@
 import React from "react";
-import SearchResults from "./SearchResults";
+import ResultContainer from "./ResultsContainer";
 class Header extends React.Component {
     constructor (props) {
         super(props);
 
         this.state = {
-            searchResults:[]
+            searchResults:[],
+            isResultsVisible:false,
         };
         this.Search = this.Search.bind(this);
     }
@@ -24,9 +25,11 @@ class Header extends React.Component {
         .then(body => {
             if (e.target.value.length > 0) {
                 this.setState({searchResults:body})
+                this.setState({isResultsVisible:true})
             }
             else {
                 this.setState({searchResults:[]})
+                this.setState({isResultsVisible:false})
             } 
         })
         }
@@ -38,13 +41,7 @@ class Header extends React.Component {
                     <input type="text" className="search-box" placeholder="Search..." onKeyUp={this.Search}></input>
                     <button className="logout-button" onClick={this.props.btn}>Log out</button>
                 </div>
-                <div className="results-container">
-                    {
-                       this.state.searchResults.map((person,i) => {
-                            return <SearchResults key={i} firstname={person.firstname} lastname={person.lastname}/>  
-                       })
-                    }
-                </div>
+                {this.state.isResultsVisible ? <ResultContainer recommendations={this.state.searchResults}/> : null}
             </div>
             
             
