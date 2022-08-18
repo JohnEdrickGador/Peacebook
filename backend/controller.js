@@ -268,6 +268,12 @@ const AcceptRequest = (req, res) => {
       console.log(err);
     }
   })
+
+  User.updateOne({_id:newFriend},{$push:{friends:user}},(err,output) => {
+    if (err) {
+      console.log(err);
+    }
+  })
 }
 
 const RejectRequest = (req,res) => {

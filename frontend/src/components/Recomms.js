@@ -30,6 +30,7 @@ class Recomms extends React.Component {
         })
         alert("Request sent")
         e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+        window.location.reload();
     }
     render() {
         return(

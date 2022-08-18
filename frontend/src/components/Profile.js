@@ -7,7 +7,9 @@ class Profile extends React.Component {
         this.state = {
             username: this.props.name,
             userId: this.props.userId,
-            personalPostCount: 0
+            personalPostCount: null,
+            friendsCount: null,
+            requestsCount: null,
         };
     }
 
@@ -17,19 +19,31 @@ class Profile extends React.Component {
             userId : this.state.userId
         }
         //send get request to server
-        fetch("http://localhost:3001/GetUserPosts",
-    {
-        method: 'POST',
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(user)
-    })
 
-    .then(response => response.json())
-    .then(body => {
-        if (body != null){
-            this.setState({personalPostCount:body.length})
-        }})
+        //multiple fetch requests
+        Promise.all([fetch("http://localhost:3001/GetUserPosts",
+        {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(user)
+        }),fetch("http://localhost:3001/ViewStats",
+        {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify(user)
+        })])
+       
+        .then(([res1,res2]) => {
+            return Promise.all([res1.json(),res2.json()])
+        })
+
+        .then(([res1,res2]) => {
+            this.setState({personalPostCount:res1.length})
+            this.setState({friendsCount:res2.friends.length})
+            this.setState({requestsCount:res2.requests.length})
+        })
     }
+
     render() {
         return(
             <div className="profile-container">
@@ -41,11 +55,11 @@ class Profile extends React.Component {
                             <h4>Posts</h4>
                         </div>
                         <div className="stats-container">
-                            <h3>2</h3>
+                            <h3>{`${this.state.friendsCount}`}</h3>
                             <h4>Friends</h4>
                         </div>
                         <div className="stats-container">
-                            <h3>3</h3>
+                            <h3>{`${this.state.requestsCount}`}</h3>
                             <h4>Pending requests</h4>
                         </div>
                     </div>
