@@ -4,7 +4,6 @@
     width: 30%;
     /* border: 1px solid white; */
     margin-top: 2%;
-    padding: 2px;
     position: absolute;
     max-height: 150px;
     overflow: scroll;
@@ -12,13 +11,12 @@
 }
 
 .search-result {
-    display: flex;
     border-bottom: 1px solid gray;
-    cursor: pointer;
+    padding: 2px;
+    margin: 3px;
     transition: 0.2s all ease-in-out;
 }
 
-.search-result:hover{
-    background-color: #c7a674;
+.search-result:hover {
+    background-color: #b68b4b;
 }
-
